@@ -59,14 +59,30 @@ public class MovimientoJugador : MonoBehaviour
 		moveVector.z = Velocidad; // moviemiento constante en el eje z para que simpre vaya hacia el frente
 		controller.Move (moveVector * Time.deltaTime);
 
+
 		/// x
 
-		/*
-		if (Input.GetKeyDown (KeyCode.LeftArrow))   // movimiento entre 3 carriles 
-			{ while(newposition > -2.0f)
-			moveVector.x = -7;
-			}*/
-		if( Input.GetKeyDown(KeyCode.LeftArrow))  // movimiento entre 3 carriles 
+
+		/*if ((Input.GetKeyDown (KeyCode.LeftArrow)) && (carril >-1))   // movimiento entre 3 carriles 
+			{ if(newposition > -2.0f)
+			moveVector.x = -4;
+			carril -=1;
+			}
+		if ((Input.GetKeyDown (KeyCode.RightArrow)) && (carril >1))   // movimiento entre 3 carriles 
+		{ if(newposition > -2.0f)
+			moveVector.x = 3;
+			carril +=1;
+		}
+
+		if (newposition <= -2){
+			moveVector.x = 0;}
+
+		if (newposition >= 2){
+			moveVector.x = 0;}*/
+		
+
+
+		if( Input.GetKeyDown(KeyCode.LeftArrow))   // movimiento entre 3 carriles 
 		{if (carril > -1)
 			carril --;
 		}
@@ -77,9 +93,9 @@ public class MovimientoJugador : MonoBehaviour
 
 
 		Vector3 newposition = transform.position;  // posicionar el objeto segun el valor que tenga la variable "carril"
-		newposition.x = carril * 2;
+		newposition.x = Mathf.Lerp(newposition.x, 2 * carril, Time.deltaTime * 5);
 		transform.position = newposition;
-			
+
 
 			
 		/// aumento progresivo de la velocidad cada 100 metros
